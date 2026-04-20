@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ben Attanasio | Operator. Builder. Engineer.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            --bg-deep: #050a07;
-            --bg-panel: rgba(20, 30, 25, 0.4);
-            --accent-green: #00ff9d;
-            --accent-dim: #1a4d33;
-            --text-main: #e0e6e3;
-            --text-muted: #8fa396;
+            --bg-deep: #131313;
+            --bg-panel: rgba(20, 20, 20, 0.6);
+            --accent-green: #7a8c68;
+            --accent-dim: #3d4a35;
+            --text-main: #eae6dc;
+            --text-muted: #8a8a7a;
             --font-display: 'Courier New', Courier, monospace;
             --font-body: system-ui, -apple-system, sans-serif;
-            --card-border: 1px solid rgba(0, 255, 157, 0.1);
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --card-border: 1px solid rgba(255, 255, 255, 0.06);
             --glass: blur(12px);
         }
 
@@ -34,6 +36,51 @@
             line-height: 1.6;
         }
 
+        /* --- ACS ANNOUNCEMENT BANNER --- */
+        .acs-banner {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(19, 19, 19, 0.95);
+            border-bottom: 1px solid rgba(122, 140, 104, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.65rem 1rem;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .acs-banner-label {
+            color: var(--accent-green);
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+
+        .acs-banner-link {
+            color: var(--text-main);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease;
+            margin: 0 0.5rem;
+        }
+
+        .acs-banner-link:hover {
+            color: var(--accent-green);
+        }
+
+        .acs-banner-sub {
+            color: var(--text-muted);
+            margin-left: 0.5rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 600px) {
+            .acs-banner-sub { display: none; }
+        }
+
         /* --- AMBIENT BACKGROUND --- */
         .ambient-bg {
             position: fixed;
@@ -42,20 +89,18 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(0, 80, 40, 0.15), transparent 40%),
-                radial-gradient(circle at 85% 30%, rgba(20, 60, 40, 0.1), transparent 40%);
-            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(40, 45, 35, 0.07), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(35, 40, 30, 0.05), transparent 40%);
             pointer-events: none;
         }
 
-        /* Monstera Abstract Shapes */
+        /* Abstract Shapes */
         .leaf-shape {
             position: fixed;
-            background: linear-gradient(135deg, rgba(0,255,157,0.03), transparent);
+            background: linear-gradient(135deg, rgba(122, 140, 104, 0.02), transparent);
             border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            filter: blur(40px);
+            filter: blur(60px);
             z-index: -1;
             animation: float 20s infinite ease-in-out;
         }
@@ -101,9 +146,10 @@
         }
 
         .display-text {
+            font-family: var(--font-serif);
             font-size: clamp(2.5rem, 5vw, 4.5rem);
             line-height: 1.1;
-            background: linear-gradient(to right, #fff, #8fa396);
+            background: linear-gradient(to right, #eae6dc, #8a8a7a);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -114,7 +160,7 @@
         .btn {
             display: inline-block;
             padding: 1rem 1.5rem;
-            background: rgba(0, 255, 157, 0.05);
+            background: transparent;
             border: 1px solid var(--accent-green);
             color: var(--accent-green);
             text-decoration: none;
@@ -131,32 +177,46 @@
         .btn:hover {
             background: var(--accent-green);
             color: var(--bg-deep);
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
         }
 
         .btn-secondary {
-            border-color: var(--text-muted);
+            border-color: rgba(255,255,255,0.15);
             color: var(--text-muted);
             background: transparent;
         }
-        
+
         .btn-secondary:hover {
-            border-color: var(--text-main);
+            border-color: rgba(255,255,255,0.3);
             color: var(--text-main);
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             box-shadow: none;
+        }
+
+        .btn-acs {
+            background: var(--accent-green);
+            color: var(--bg-deep);
+            border-color: var(--accent-green);
+            font-weight: 800;
+        }
+
+        .btn-acs:hover {
+            background: #8fa076;
+            border-color: #8fa076;
+            color: var(--bg-deep);
+            box-shadow: 0 4px 20px rgba(122, 140, 104, 0.3);
         }
 
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .card {
-            background: var(--bg-panel);
-            border: var(--card-border);
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 2.5rem;
             backdrop-filter: var(--glass);
             border-radius: 4px;
@@ -167,14 +227,14 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
+            transform: translateY(-4px);
+            border-color: rgba(122, 140, 104, 0.3);
         }
 
         .card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
+            top: 0; left: 0; width: 3px; height: 100%;
             background: var(--accent-green);
             opacity: 0;
             transition: opacity 0.3s;
@@ -185,7 +245,7 @@
         }
 
         /* --- SECTION SPECIFIC --- */
-        
+
         /* Hero Split Layout */
         .hero-split {
             display: grid;
@@ -205,7 +265,6 @@
             align-items: center;
         }
 
-        /* IMAGE STYLES */
         .hero-img {
             width: 100%;
             max-width: 400px;
@@ -213,13 +272,12 @@
             object-fit: cover;
             border-radius: 2px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 157, 0.2); 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
         }
 
         .hero-img:hover {
-            border-color: var(--accent-green);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 15px rgba(0, 255, 157, 0.3);
+            border-color: rgba(122, 140, 104, 0.35);
         }
 
         .img-frame {
@@ -227,26 +285,26 @@
             width: 100%;
             max-width: 420px;
             height: 100%;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
             z-index: -1;
             transform: translate(15px, 15px);
             transition: all 0.3s ease;
         }
 
         .hero-image-container:hover .img-frame {
-             border-color: rgba(0, 255, 157, 0.3);
+             border-color: rgba(122, 140, 104, 0.2);
              transform: translate(10px, 10px);
         }
 
         .hero-tags {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-        
+
         .tag {
-            border: 1px solid var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.12);
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -254,11 +312,11 @@
             background: rgba(0,0,0,0.2);
         }
 
-        /* Stats Grid for FinOps */
+        /* Stats Grid */
         .stats-grid {
-            margin-top: 1rem; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
@@ -268,43 +326,59 @@
             overflow: hidden;
             min-width: 0;
         }
-        
+
         .stat-val {
             font-size: clamp(1.3rem, 2vw, 2rem);
             font-weight: 700;
             color: var(--text-main);
-            white-space: nowrap; 
+            white-space: nowrap;
         }
-        
+
         .stat-label {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        /* Nova Section */
-        .nova-grid {
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 4rem; 
-            align-items: start; 
-            margin-top: 1rem;
+        /* ACS Section */
+        .acs-build-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: start;
         }
 
-        #nova .schematic-overlay {
-            position: absolute;
-            right: 0;
-            top: 20%;
-            width: 40%;
-            height: 60%;
-            border: 1px dashed var(--text-muted);
-            opacity: 0.1;
-            pointer-events: none;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
+        .acs-build-list {
+            list-style: none;
         }
-        #nova .schematic-overlay div {
-            border: 1px solid var(--text-muted);
+
+        .acs-build-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .acs-build-list li::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        /* Sift / Nova Section */
+        .nova-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 1rem;
         }
 
         .feature-list {
@@ -328,11 +402,41 @@
             color: var(--text-muted);
         }
 
+        /* Section divider */
+        .section-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent-green);
+            margin-bottom: 2rem;
+        }
+
         /* Footer */
         footer {
             padding: 6rem 0 4rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.04);
             text-align: center;
+        }
+
+        .footer-display {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-sub {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto 1rem;
+            line-height: 1.7;
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent-green);
+            margin: 0 auto 2rem;
         }
 
         /* --- RESPONSIVE FIXES --- */
@@ -340,18 +444,17 @@
             .hero-split { grid-template-columns: 1fr; gap: 3rem; }
             .hero-image-container { order: -1; justify-content: flex-start; }
             .hero-img, .img-frame { max-width: 250px; }
-            
-            section { padding: 4rem 0; min-height: auto; }
-            
-            #nova .schematic-overlay { display: none; }
 
-            /* Stack Stats Grid on Mobile */
-            .stats-grid {
+            section { padding: 4rem 0; min-height: auto; }
+
+            .stats-grid { grid-template-columns: 1fr; }
+
+            .nova-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            /* Stack Nova Grid on Mobile */
-            .nova-grid {
+            .acs-build-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -364,15 +467,22 @@
     <div class="leaf-shape leaf-1"></div>
     <div class="leaf-shape leaf-2"></div>
 
+    <div class="acs-banner">
+        <span class="acs-banner-label">FREE COMMUNITY</span>
+        Join
+        <a href="https://www.skool.com/agenticcodingsociety/" target="_blank" class="acs-banner-link">Agentic Coding Society →</a>
+        <span class="acs-banner-sub">Build real apps. Ship fast. No fluff.</span>
+    </div>
+
     <section id="hero">
         <div class="container">
             <div class="hero-split">
                 <div class="hero-content">
                     <span class="mono-label">System Status: Online | Austin, TX</span>
                     <h1 class="display-text">
-                        OPERATOR.<br>
-                        BUILDER.<br>
-                        FINOPS ENGINEER.
+                        Operator.<br>
+                        Builder.<br>
+                        FinOps Engineer.
                     </h1>
                     <p style="max-width: 600px; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2.5rem;">
                         Building the systems that run the machine. Enterprise finance by day. Autonomous systems by night.
@@ -381,14 +491,16 @@
                         <span class="tag">FinOps Certified</span>
                         <span class="tag">AI Automation</span>
                         <span class="tag">Multi-Agent Systems</span>
+                        <span class="tag">Agentic Coding Society</span>
                     </div>
                     <div style="margin-top: 2rem;">
-                        <a href="#engine" class="btn">The Engine</a>
-                        <a href="#strategy" class="btn btn-secondary">View Strategy</a>
-                        <a href="#nova" class="btn btn-secondary">R&D Lab</a>
+                        <a href="https://www.skool.com/agenticcodingsociety/" target="_blank" class="btn btn-acs">Join the Community →</a>
+                        <a href="#engine" class="btn btn-secondary">The Engine</a>
+                        <a href="#acs" class="btn btn-secondary">Community</a>
+                        <a href="#sift" class="btn btn-secondary">Sift</a>
                     </div>
                 </div>
-                
+
                 <div class="hero-image-container">
                     <div class="img-frame"></div>
                     <img src="img1.png" alt="Ben Attanasio" class="hero-img">
@@ -400,17 +512,18 @@
     <section id="engine">
         <div class="container">
             <span class="mono-label">01 // The Engine (9-5)</span>
-            <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Enterprise Scale. <br><span style="color: var(--text-muted)">Financial Precision.</span></h2>
-            
+            <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-family: var(--font-serif);">Enterprise Scale.</h2>
+            <h2 style="font-size: 2.5rem; margin-bottom: 2rem; font-family: var(--font-serif); color: var(--text-muted);">Financial Precision.</h2>
+
             <div class="card-grid">
                 <div class="card">
                     <h3>Tricentis</h3>
-                    <p style="color: var(--accent-green); margin-bottom: 1rem;">$425M ARR // FinOps Engineer</p>
+                    <p style="color: var(--accent-green); margin-bottom: 1rem; font-size: 0.9rem; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em;">$425M ARR // FinOps Engineer</p>
                     <p style="color: var(--text-muted);">Managing backend financial infrastructure for enterprise-grade software test automation. Optimizing cloud spend at the crossroads of IT and finance.</p>
                 </div>
                 <div class="card">
                     <h3>MetLife</h3>
-                    <p style="color: var(--accent-green); margin-bottom: 1rem;">$71B Revenue // Past Role</p>
+                    <p style="color: var(--accent-green); margin-bottom: 1rem; font-size: 0.9rem; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em;">$71B Revenue // Past Role</p>
                     <p style="color: var(--text-muted);">Managed cloud financial analysis and demand management. Experience with server decommissioning and high-volume data analysis.</p>
                 </div>
                 <div class="card">
@@ -430,68 +543,78 @@
         </div>
     </section>
 
-    <section id="strategy">
+    <section id="acs">
         <div class="container">
-            <span class="mono-label">02 // The Strategic Partner</span>
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">God of Prompt</h2>
-            <p style="color: var(--text-muted); max-width: 700px; margin-bottom: 3rem; font-size: 1.1rem;">
-                Automation architect. Strategic partner. Operating the systems behind God of Prompt.
+            <span class="mono-label">02 // The Community</span>
+            <h2 style="font-size: 2.5rem; margin-bottom: 0.75rem; font-family: var(--font-serif);">Agentic Coding Society</h2>
+            <div class="section-divider"></div>
+            <p style="color: var(--text-muted); max-width: 680px; margin-bottom: 3rem; font-size: 1.1rem; line-height: 1.8;">
+                Build your personal app ecosystem with agentic coding. Ship robust, beautiful software in a fraction of the time. Whether you code or not.
             </p>
 
-            <div class="card-grid">
-                <div class="card">
-                    <span class="mono-label">Role: Operator & Builder</span>
-                    <p style="margin-top: 0.5rem;">Architecting high-level automation workflows using n8n and Make. Creating the infrastructure that powers the community and agency.</p>
+            <div class="acs-build-grid">
+                <div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--text-muted); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.08em; font-weight: normal;">What You Build</h3>
+                    <ul class="acs-build-list">
+                        <li>Desktop apps, web apps, and Chrome extensions</li>
+                        <li>Internal tools that fit your exact workflow</li>
+                        <li>Agentic flows that run in the background</li>
+                        <li>SaaS products you can actually ship</li>
+                        <li>Client automations that hold up in production</li>
+                    </ul>
                 </div>
-                <div class="card">
-                    <span class="mono-label">Philosophy</span>
-                    <p style="margin-top: 0.5rem;">No guru theory. Showing what actually sells and what actually works inside the machine.</p>
-                </div>
-                <div class="card" style="display: flex; align-items: center; justify-content: center; background: rgba(0,255,157,0.05);">
-                    <div style="text-align: center;">
-                        <span class="stat-val" style="color: var(--accent-green);">6M+</span>
-                        <br>
-                        <span class="stat-label">Total Content Views</span>
-                    </div>
+                <div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--text-muted); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.08em; font-weight: normal;">What's Inside</h3>
+                    <ul class="acs-build-list">
+                        <li>Claude Code setups, skills, and tactical strategies</li>
+                        <li>1-on-1 DM access when you're stuck</li>
+                        <li>A high-quality builder network</li>
+                        <li>Guides for Claude Code, Codex, Cursor, and n8n</li>
+                    </ul>
                 </div>
             </div>
-            
-            <div style="margin-top: 3rem;">
-                <a href="https://www.godofprompt.ai/" target="_blank" class="btn">Get the Prompts</a>
+
+            <div style="margin-top: 3rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="https://www.skool.com/agenticcodingsociety/" target="_blank" class="btn btn-acs">Join Free →</a>
+                <div>
+                    <span style="font-size: 1.8rem; font-weight: 700; color: var(--text-main);">6M+</span>
+                    <span style="color: var(--text-muted); margin-left: 0.5rem; font-size: 0.9rem;">views on AI content</span>
+                </div>
+                <div>
+                    <span style="font-size: 1.8rem; font-weight: 700; color: var(--text-main);">2+</span>
+                    <span style="color: var(--text-muted); margin-left: 0.5rem; font-size: 0.9rem;">years shipping agentic apps</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="nova">
-        <div class="schematic-overlay">
-            <div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div>
-        </div>
+    <section id="sift">
         <div class="container">
-            <span class="mono-label">03 // R&D Lab</span>
-            <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Project NOVA</h2>
-            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px;">
-                A Network Of Virtual Agents you command, monitor, and watch work. All from ChatGPT.
+            <span class="mono-label">03 // R&D</span>
+            <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-family: var(--font-serif);">Sift</h2>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin-bottom: 3rem;">
+                Stop manually tracking what matters. Tell Sift what to follow. Get a sourced briefing in your inbox on your schedule.
             </p>
-            
+
             <div class="nova-grid">
                 <div>
                     <ul class="feature-list">
                         <li class="feature-item">
-                            <strong>Multi-Agent System</strong>
-                            <span>Complex n8n orchestration flows.</span>
+                            <strong>AI-Powered Research</strong>
+                            <span>Sift researches the web for you. Fresh sources, not recycled newsletter content.</span>
                         </li>
                         <li class="feature-item">
-                            <strong>ChatGPT-Native Interface</strong>
-                            <span>No new tools to learn. Command your army where you already work.</span>
+                            <strong>Your Inbox, Your Schedule</strong>
+                            <span>Quick reads or in-depth briefings. Daily, weekly, biweekly, or monthly. Your call.</span>
                         </li>
                         <li class="feature-item">
-                            <strong>Real-World Execution</strong>
-                            <span>These agents act. Real tools. Real deliverables.</span>
+                            <strong>Live Product</strong>
+                            <span>Free tier available. Pro at $8.25/month. Built and shipped with agentic coding.</span>
                         </li>
                     </ul>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://sift.scalingsidekick.com/" target="_blank" class="btn">Launch Sift →</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -499,13 +622,18 @@
 
     <footer id="contact">
         <div class="container">
-            <h2 style="font-size: 3rem; margin-bottom: 2rem;">Your move.</h2>
-            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
-                <a href="https://www.godofprompt.ai/" class="btn">PROMPTS & TOOLS</a>
+            <h2 class="footer-display">Your move.</h2>
+            <div class="footer-divider"></div>
+            <p class="footer-sub">
+                Build your personal app ecosystem. Ship in days what teams ship in months.
+            </p>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;">
+                <a href="https://www.skool.com/agenticcodingsociety/" target="_blank" class="btn btn-acs">JOIN ACS FREE</a>
+                <a href="https://sift.scalingsidekick.com/" target="_blank" class="btn btn-secondary">LAUNCH SIFT</a>
                 <a href="https://www.youtube.com/@god-of-prompt" class="btn btn-secondary">AI TUTORIALS</a>
                 <a href="https://www.youtube.com/@BenAttanasio" class="btn btn-secondary">PERSONAL CHANNEL</a>
             </div>
-            <p style="margin-top: 5rem; color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-display); opacity: 0.5;">
+            <p style="margin-top: 5rem; color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-display); opacity: 0.4;">
                 BEN ATTANASIO &copy; 2025 // AUSTIN, TX
             </p>
         </div>
@@ -515,7 +643,7 @@
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
-            
+
             const leaves = document.querySelectorAll('.leaf-shape');
             leaves.forEach((leaf, index) => {
                 const speed = (index + 1) * 20;
